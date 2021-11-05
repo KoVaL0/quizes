@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
+
+import { QuestionCard } from './components/QuestionCard/QuestionCard';
+import data from './data'
+
 import './App.css';
 
 function App() {
+  const [card, setCard] = React.useState(0)
+  const [count, setCount] = React.useState(0)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <p>Количество правильных ответов: {count}</p>
+      {
+        data.map((item, id) => (
+          <QuestionCard
+            className={id === card ? 'show-card' : 'hide-card'}
+            id={id}
+            length={data.length}
+            setCard={setCard}
+            setCount={setCount}
+            {...item}
+          />
+        ))
+      }
     </div>
   );
 }
